@@ -501,3 +501,25 @@ footer.disclaimer {
     transition: none !important;
   }
 }
+
+.homelink {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--ink-3);
+  border-bottom: 0;
+}
+.homelink:hover { color: var(--ink); }
+
+/* One concrete instruction beats a paragraph of description: a reviewer with
+   thirty seconds needs to be told what to click. */
+.howto {
+  margin: 10px 0 0;
+  padding: 9px 13px;
+  border-left: 2px solid var(--brass);
+  background: var(--panel);
+  border-radius: 0 6px 6px 0;
+  font-size: 14.5px;
+  color: var(--ink-2);
+}

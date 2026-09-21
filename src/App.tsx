@@ -43,7 +43,12 @@ export function App() {
   return (
     <div className="app">
       <header className="masthead">
+        <a className="homelink" href="https://shwetalmehta.com">&larr; shwetalmehta.com</a>
         <h1>Security Posture Simulator</h1>
+        <p className="howto">
+          <strong>Try this:</strong> pick a scenario, turn on one control, then switch between the
+          CISO and CFO tabs. Same numbers, different argument.
+        </p>
         <p>
           Toggle security controls across four enterprise scenarios and watch residual risk,
           detection time and operational burden move together. Then read the same simulation
@@ -54,7 +59,7 @@ export function App() {
           <strong>Illustrative model.</strong> The control taxonomy is generic industry
           terminology and the effectiveness values are reasoned judgements chosen to make the
           model behave sensibly. This is a demonstration of how to reason about layered
-          defence — not a validated risk assessment, and not advice for any real estate.
+          defence — not a validated risk assessment, and not advice for any real organisation.
         </p>
       </header>
 
