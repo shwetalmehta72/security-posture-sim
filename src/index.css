@@ -1,0 +1,503 @@
+/*
+ * Hand-written CSS with design tokens rather than a utility framework — the app
+ * is small enough that a dependency would cost more than it saves, and tokens
+ * keep the light and dark palettes honest.
+ */
+
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-2: #eef1f5;
+  --border: #d8dde5;
+  --text: #16191f;
+  --text-dim: #5b6573;
+  --accent: #0f7b8a;
+  --accent-soft: #d8eef1;
+
+  --good: #17795e;
+  --warn: #9a6400;
+  --bad: #ab2f26;
+
+  --tone-red: #c0392b;
+  --tone-amber: #b8791a;
+  --tone-violet: #7048a8;
+  --tone-cyan: #12788c;
+  --tone-lime: #5b7d16;
+
+  --radius: 10px;
+  --shadow: 0 1px 2px rgb(16 25 31 / 8%), 0 4px 12px rgb(16 25 31 / 4%);
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1116;
+    --surface: #161b22;
+    --surface-2: #1d232c;
+    --border: #2b323d;
+    --text: #e6eaf0;
+    --text-dim: #9aa5b4;
+    --accent: #3fc3d4;
+    --accent-soft: #10323a;
+
+    --good: #4ac79b;
+    --warn: #e0a641;
+    --bad: #f0645a;
+
+    --tone-red: #f0645a;
+    --tone-amber: #e0a641;
+    --tone-violet: #b08ae8;
+    --tone-cyan: #4ec4d8;
+    --tone-lime: #a5cc4a;
+
+    --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 4px 16px rgb(0 0 0 / 24%);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.25;
+  font-weight: 650;
+}
+
+.app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 28px 20px 72px;
+}
+
+.masthead {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 18px;
+  margin-bottom: 22px;
+}
+
+.masthead h1 {
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.masthead p {
+  margin: 8px 0 0;
+  color: var(--text-dim);
+  max-width: 70ch;
+}
+
+.banner {
+  margin: 14px 0 0;
+  padding: 10px 14px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 0.875rem;
+  color: var(--text);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr) minmax(0, 330px);
+  gap: 18px;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.card + .card {
+  margin-top: 16px;
+}
+
+.card > h2 {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------------ scenarios */
+
+.scenario-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.scenario {
+  text-align: left;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  font: inherit;
+  transition: border-color 120ms ease, background 120ms ease;
+}
+
+.scenario:hover {
+  border-color: var(--accent);
+}
+
+.scenario[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.scenario strong {
+  display: block;
+  font-size: 0.925rem;
+}
+
+.scenario span {
+  display: block;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  margin-top: 3px;
+}
+
+/* -------------------------------------------------------------------- controls */
+
+.control-group + .control-group {
+  margin-top: 14px;
+}
+
+.control-group > h3 {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  margin-bottom: 7px;
+}
+
+.control {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  padding: 7px 8px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.control:hover {
+  background: var(--surface-2);
+}
+
+.control input {
+  margin: 3px 0 0;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+}
+
+.control-body {
+  display: block;
+  min-width: 0;
+}
+
+.control-name {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 550;
+}
+
+.control-note {
+  display: block;
+  font-size: 0.775rem;
+  color: var(--text-dim);
+  margin-top: 1px;
+}
+
+.pill {
+  display: inline-block;
+  font-size: 0.675rem;
+  font-family: var(--mono);
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  margin-left: 6px;
+  vertical-align: 1px;
+}
+
+.pill.low-relevance {
+  border-color: var(--warn);
+  color: var(--warn);
+}
+
+/* --------------------------------------------------------------------- metrics */
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+  gap: 10px;
+}
+
+.metric {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.metric-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+}
+
+.metric-value {
+  font-size: 1.4rem;
+  font-weight: 680;
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.metric-value.good {
+  color: var(--good);
+}
+.metric-value.warn {
+  color: var(--warn);
+}
+.metric-value.bad {
+  color: var(--bad);
+}
+
+.metric-sub {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.metric.highlight {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.bar {
+  height: 7px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.bar > div {
+  height: 100%;
+  background: var(--accent);
+  transition: width 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------------------------------------------------------------------- threats */
+
+.threat-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 54px;
+  gap: 10px;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.threat-name {
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.threat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.threat-track {
+  grid-column: 1 / -1;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.threat-track > div {
+  height: 100%;
+  transition: width 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.threat-reduction {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-align: right;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------------- personas */
+
+.persona-tabs {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.persona-tab {
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-dim);
+  cursor: pointer;
+}
+
+.persona-tab[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.persona-role {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-bottom: 2px;
+}
+
+.persona-focus {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--border);
+}
+
+.persona-narrative {
+  font-size: 0.9rem;
+}
+
+/* --------------------------------------------------------------------- topology */
+
+.topology {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.topo-link {
+  stroke: var(--border);
+  stroke-width: 0.5;
+}
+
+.topo-node rect {
+  fill: var(--surface-2);
+  stroke: var(--border);
+  stroke-width: 0.4;
+}
+
+.topo-node.protected rect {
+  stroke: var(--accent);
+  stroke-width: 0.9;
+}
+
+.topo-node text {
+  fill: var(--text);
+  font-size: 2.3px;
+  text-anchor: middle;
+  font-family: var(--sans);
+}
+
+.topo-count {
+  fill: var(--accent);
+  font-size: 2.3px;
+  font-family: var(--mono);
+  text-anchor: middle;
+}
+
+.packet {
+  fill: var(--tone-red);
+}
+
+.hint {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+
+.hint b {
+  color: var(--text);
+}
+
+.row-actions {
+  display: flex;
+  gap: 7px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 5px 11px;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.btn:hover {
+  border-color: var(--accent);
+}
+
+footer.disclaimer {
+  margin-top: 26px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  max-width: 78ch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

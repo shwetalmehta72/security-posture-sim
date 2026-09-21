@@ -1,0 +1,13 @@
+# Normalise all text files to LF inside the repository.
+* text=auto eol=lf
+
+# Binary assets - never convert line endings.
+*.png   binary
+*.jpg   binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary
+
+# Lockfiles are generated.
+package-lock.json linguist-generated=true
+pnpm-lock.yaml    linguist-generated=true
